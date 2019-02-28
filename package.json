@@ -1,0 +1,7 @@
+{
+  "name": "chrome-extension-reload-boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/chouretr/chrome-extension-reload-boilerplate.git",
+  "license": "MIT"
+}
