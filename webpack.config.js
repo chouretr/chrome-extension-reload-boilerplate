@@ -1,21 +1,20 @@
 const { resolve } = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WebpackChromeReloaderPlugin = require("../dist/webpack-chrome-extension-reloader");
+const WebpackChromeReloaderPlugin = require("webpack-chrome-extension-reloader");
 
 const mode = process.env.NODE_ENV;
 module.exports = {
   mode,
   devtool: "inline-source-map",
   entry: {
-    "content-script": "./sample/plugin-src/my-content-script.js",
-    background: "./sample/plugin-src/my-background.js"
+    "content-script": "./src/content-scripts/content-script.js",
+    background: "./src/background/background.js"
   },
   output: {
     publicPath: ".",
     path: resolve(__dirname, "dist/"),
     filename: "[name].js",
-    libraryTarget: "umd"
   },
   plugins: [
     /***********************************************************************/
@@ -25,8 +24,8 @@ module.exports = {
 
     new MiniCssExtractPlugin({ filename: "style.css" }),
     new CopyWebpackPlugin([
-      { from: "./sample/manifest.json" },
-      { from: "./sample/icons" }
+      { from: "./manifest.json" },
+      { from: "./icons" }
     ])
   ],
   module: {
