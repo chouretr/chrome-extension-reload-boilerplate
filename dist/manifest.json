@@ -1,11 +1,15 @@
 {
   "manifest_version": 2,
-  "name": "Webpack Chrome Extension Reloader Sample",
+  "name": "Chrome Extension Reloader Boilerplate",
   "version": "0.1",
   "background": {
     "scripts": [
       "background.js"
     ]
+  },
+  "browser_action": {
+    "default_title": "Chrome Extension Reloader Boilerplate",
+    "default_popup": "popup.html"
   },
   "icons": {
     "16": "webpack.16.png",
