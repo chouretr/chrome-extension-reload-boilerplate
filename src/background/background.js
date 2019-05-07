@@ -21,3 +21,17 @@ chrome.runtime.onInstalled.addListener(function (details) {
 	let version = details.reason + "==>" + details.previousVersion;
 	console.log(version);
 });
+
+initScriptInjection();
+
+function initScriptInjection() {
+	chrome.windows.getAll({
+		populate: true
+	}, function (windows) {
+		windows[0].tabs.forEach(tab => {
+			chrome.tabs.executeScript(tab.id, {
+				file: 'content.js'
+			});
+		})
+	});
+}
