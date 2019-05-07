@@ -10,9 +10,9 @@ module.exports = {
   mode,
   devtool: "inline-source-map",
   entry: {
-    "content-script": "./src/content-scripts/content-script.js",
-    background: "./src/background/background.js",
-    popup: "./src/popup/popup.js"
+    app: "./src/content/App.js",
+    content: "./src/content/content.js",
+    background: "./src/background/background.js"
   },
   output: {
     publicPath: ".",
@@ -23,27 +23,17 @@ module.exports = {
     /***********************************************************************/
     /* By default the plugin will work only when NODE_ENV is "development" */
     /***********************************************************************/
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
     new WebpackChromeReloaderPlugin(),
-    new MiniCssExtractPlugin({ filename: "style.css" }),
     new CopyWebpackPlugin([
       { from: "./manifest.json" },
       { from: "./icons" }
-    ]),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "popup.html"),
-      filename: "popup.html",
-      chunks: ["popup"]
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "options.html"),
-      filename: "options.html",
-      chunks: ["options"]
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "background.html"),
-      filename: "background.html",
-      chunks: ["background"]
-    }),
+    ])
   ],
   module: {
     rules: [
